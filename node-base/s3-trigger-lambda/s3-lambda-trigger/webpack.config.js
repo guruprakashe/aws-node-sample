@@ -3,10 +3,20 @@ module.exports = (options, webpack) => {
     '@nestjs/microservices/microservices-module',
     '@nestjs/websockets/socket-module',
   ];
-
+  const TerserPlugin = require('terser-webpack-plugin');
+  const CopyPlugin = require("copy-webpack-plugin");
   return {
     ...options,
     externals: [],
+    optimization: {
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: {
+            keep_classnames: true,
+          },
+        }),
+      ],
+    },
     plugins: [
       ...options.plugins,
       new webpack.IgnorePlugin({
@@ -21,6 +31,13 @@ module.exports = (options, webpack) => {
           return false;
         },
       }),
+      new CopyPlugin({
+        patterns: [{ from: 'node_modules', to: 'node_modules' }],
+      }),
     ],
+    output: {
+      ...options.output,
+      libraryTarget: 'commonjs2',
+    },
   };
 };

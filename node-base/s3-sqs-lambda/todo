@@ -4,3 +4,22 @@
 4. test case addition
 5. docker compose - and package as image or zip
 6. option to  invoke sh files
+
+
+npm install --save-dev webpack webpack-cli webpack-node-externals ts-loader
+npm install fork-ts-checker-webpack-plugin
+
+add to the package.json
+
+
+npm i -D @types/aws-lambda serverless-offline
+npm install copy-webpack-plugin --save-dev
+npm i --save-dev terser-webpack-plugin
+"esModuleInterop": true, - in tsconfg
+"nest:webpack": "npm run clean-linux && nest build --webpack",
+"clean-linux": "rm -rf dist",
+"clean-windows": "rd /s /q lib >nul 2>&1|echo.>nul",
+"lambda:zip": "npm run nest:webpack && pushd dist; zip -r my-function.zip *",
+
+
+
