@@ -22,4 +22,9 @@ npm i --save-dev terser-webpack-plugin
 "lambda:zip": "npm run nest:webpack && pushd dist; zip -r my-function.zip *",
 
 
+docker compose up -d node16_build
+
+docker compose exec node16_build sh /app/s3-trigger-lambda/s3-lambda-trigger/build.sh
+
+
 

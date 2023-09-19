@@ -1,24 +1,13 @@
 version: '3.8'
 services:
   node16_build:
-    build:
-        context: .
-        dockerfile: node.Dockerfile
-    #image: node:16
+    #build:
+        #context: .
+        #dockerfile: node.Dockerfile
+    image: node-16-aws-base:v1
     volumes:
-      - .:/src
-    working_dir: /src/wrkdir
-    privileged: true
-    networks: 
-      - sharednetwork_build
-  dev_container_build:
-    build:
-        context: .
-        dockerfile: dev_container.Dockerfile
-    #image: node:16
-    volumes:
-      - .:/src
-    working_dir: /src/wrkdir
+      - .:/app
+    working_dir: /app
     privileged: true
     networks: 
       - sharednetwork_build
